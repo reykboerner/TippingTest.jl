@@ -1,9 +1,15 @@
 name = "TippingTest"
 uuid = "75f7372b-cee4-4a9f-bfee-e1c4ff5740ce"
-authors = ["R. Boerner"]
 version = "1.0.0-DEV"
+authors = ["R. Boerner"]
+
+[deps]
+CriticalTransitions = "251e6cd3-3112-48a5-99dd-66efcfd18334"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
+CriticalTransitions = "0.8.0"
+StaticArrays = "1.9.18"
 julia = "1.10.10"
 
 [extras]
