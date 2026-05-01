@@ -5,10 +5,14 @@ authors = ["R. Boerner"]
 
 [deps]
 CriticalTransitions = "251e6cd3-3112-48a5-99dd-66efcfd18334"
+Interpolations = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
 CriticalTransitions = "0.8.0"
+Interpolations = "0.16.2"
+Optim = "2.0.1"
 StaticArrays = "1.9.18"
 julia = "1.10.10"
 
