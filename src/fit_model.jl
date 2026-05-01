@@ -12,7 +12,7 @@ time intervals `t_A` (pre-transition phase), `t_tr` (transition phase) and `t_B`
 Returns the timeseries of the fitted null model and the optimal null model parameter vector.
 
 ## Keyword arguments
-- `model = RelaxNullModel`: `LinearNullModel` type
+- `model = RelaxNullModel`: Type of `LinearNullModel`
 - `time = 0:length(observable)-1`: Time range of observable (and forcing)
 - `t_tr = (t_s, t_e)`: Tuple containing the start (`t_s`) and end (`t_e`) time of the transition phase `t_tr`
 - `y0 = observable[1]`: Reference state of null model
