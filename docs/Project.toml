@@ -1,5 +1,8 @@
 [deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+CriticalTransitions = "251e6cd3-3112-48a5-99dd-66efcfd18334"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Suppressor = "fd094767-a336-5f1f-9728-57cf17d0bbfb"
 TippingTest = "75f7372b-cee4-4a9f-bfee-e1c4ff5740ce"
 
 [compat]

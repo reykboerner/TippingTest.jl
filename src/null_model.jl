@@ -14,16 +14,19 @@ with sensitivity ``\alpha``, following the differential equation
 ```math
 m \\dot y = -(y - y_0) + \\alpha F(t) \\.
 ```
-Here ``y_0`` is the reference equilibrium at ``F=0``.
+Here ``y_0`` is the reference state at ``F=0``.
+
+## Fields
+- `y0`: Reference state
+- `params`: Parameter vector `[alpha, m]`
 """
 struct RelaxNullModel{T<:Real} <: LinearNullModel
     y0::T
-    inertia::T
-    sensitivity::T
+    params::Vector{T}
 end
 
 function(nm::RelaxNullModel)(u, p, t)
-    du = (-(u - nm.y0) + nm.sensitivity*p[1])/nm.inertia
+    du = (-(u[1] - nm.y0) + nm.params[1]*p[1])/nm.params[2]
     return SVector{1}(du)
 end
 
@@ -40,6 +43,9 @@ function(nm::HarmonicOscillatorNullModel)(u, p, t)
     dv = (-(x - nm.y0) - nm.damping*v + nm.sensitivity*p[1])/nm.inertia
     return SVector{2}(dx, dv)
 end
+
+params(nm::HarmonicOscillatorNullModel) = [nm.inertia, nm.sensitivity, nm.damping]
+HarmonicOscillatorNullModel(y0, p::Vector) = RelaxNullModel(y0, p[1], p[2], p[3])
 
 struct GeneralNullModel{T<:Real, G} <: LinearNullModel
     y0::T
