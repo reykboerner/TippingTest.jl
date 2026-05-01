@@ -14,7 +14,7 @@ function stommel(u,p,t)
 end
 
 # Define forcing protocol
-bump(x) = exp(-50*(x-0.5)^2) + 0.3*(0.5*tanh(5*(x-0.5))+0.5)
+bump(t) = exp(-50*(t-0.5)^2) + 0.3*(0.5*tanh(5*(t-0.5))+0.5)
 amoc(traj; mu=6.25) = 1 .+ mu .*(traj[1][:,1] .- traj[1][:,2]) .^2
 fp = ForcingProfile(bump, (0.0,1.0))
 

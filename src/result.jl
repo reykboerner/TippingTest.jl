@@ -46,7 +46,7 @@ function tipping_test(observable, forcing, time, t_tr::Tuple;
         time, t_tr, model.y0, weights)
 
     fitted_model = model_type(model.y0, params)
-    residual = observable .- linear_response
+    residual = sign(params[1])*(observable .- linear_response)
     drdF = diff(residual) ./ diff(forcing)
     drdx = diff(residual) ./ diff(linear_response)
 
