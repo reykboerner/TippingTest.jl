@@ -20,10 +20,10 @@ Returns the timeseries of the fitted null model and the optimal null model param
 """
 function fit_nullmodel(observable, forcing, p_guess;
     model::Type{<:LinearNullModel} = RelaxNullModel,
-    time=0:length(observable)-1,
+    time=0.0:length(observable)-1,
     t_tr=(nothing, nothing),
     y0=observable[1],
-    fit_weights = [1,0,0]
+    weights = [1,0,0]
     )
 
     # Time indices of t_s and t_e
@@ -38,16 +38,15 @@ function fit_nullmodel(observable, forcing, p_guess;
     function score(p)
         m = model(y0, p)
         sys = CoupledODEs(m, [y0], [0.0])
-        rsys = RateSystem(sys, fp, 1; forcing_duration=time[end])
+        rsys = RateSystem(sys, fp, 1; forcing_duration=AbstractFloat(time[end]))
         sol = trajectory(rsys, time[end], [observable[1]]; Δt=time[end]-time[end-1])
         resi = (observable .- sol[1][:,1]) .^2
-        return (fit_weights[1]*sum(resi[1:t_s-1]) +
-            fit_weights[2]*sum(resi[t_s:t_e-1]) +
-            fit_weights[3]*sum(resi[t_e:end]))
+        return (weights[1]*sum(resi[1:t_s-1]) +
+            weights[2]*sum(resi[t_s:t_e-1]) +
+            weights[3]*sum(resi[t_e:end]))
     end
 
     res = optimize(score, p_guess)
-    println(Optim.minimizer(res))
 
     m = model(y0, Optim.minimizer(res))
     sys = CoupledODEs(m, [y0], [0.0])
