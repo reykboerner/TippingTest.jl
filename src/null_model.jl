@@ -23,9 +23,12 @@ struct RelaxNullModel{T<:Real} <: LinearNullModel
 end
 
 function(nm::RelaxNullModel)(u, p, t)
-    du = (-(u - nm.y0) + nm.sensitivity*p[1])/nm.inertia
+    du = (-(u[1] - nm.y0) + nm.sensitivity*p[1])/nm.inertia
     return SVector{1}(du)
 end
+
+params(nm::RelaxNullModel) = [nm.inertia, nm.sensitivity]
+RelaxNullModel(y0, p::Vector) = RelaxNullModel(y0, p[1], p[2])
 
 struct HarmonicOscillatorNullModel{T<:Real} <: LinearNullModel
     y0::T
@@ -40,6 +43,9 @@ function(nm::HarmonicOscillatorNullModel)(u, p, t)
     dv = (-(x - nm.y0) - nm.damping*v + nm.sensitivity*p[1])/nm.inertia
     return SVector{2}(dx, dv)
 end
+
+params(nm::HarmonicOscillatorNullModel) = [nm.inertia, nm.sensitivity, nm.damping]
+HarmonicOscillatorNullModel(y0, p::Vector) = RelaxNullModel(y0, p[1], p[2], p[3])
 
 struct GeneralNullModel{T<:Real, G} <: LinearNullModel
     y0::T
