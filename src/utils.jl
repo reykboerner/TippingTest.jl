@@ -1,0 +1,1 @@
+parameter(rs::RateSystem, t, pidx) = parameters(rs, t)[pidx]

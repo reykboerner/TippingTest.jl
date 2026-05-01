@@ -1,18 +1,20 @@
 module TippingTest
 
-using CriticalTransitions: RateSystem, ForcingProfile
+using CriticalTransitions: RateSystem, ForcingProfile, CoupledODEs, trajectory, parameters
 using Interpolations: linear_interpolation
 using Optim: optimize
 using StaticArrays: SVector
+using Statistics: mean
 
 include("null_model.jl")
-include("trajectory.jl")
-include("decompose_response.jl")
+include("fit_model.jl")
+include("utils.jl")
 
 export LinearNullModel
 export RelaxNullModel, HarmonicOscillatorNullModel
-export params
-export fit_nullmodel, decompose_response
+export fit_nullmodel
+export parameter # from utils
+
 export SVector # from StaticArrays
 
 end

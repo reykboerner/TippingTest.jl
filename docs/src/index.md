@@ -28,6 +28,8 @@ form as a 2-dimensional system of ODEs:
 Here $x$ and $y$ represent the meridional temperature and salinity difference between the southern and northern box, respectively. The freshwater flux ``F_a`` is the main forcing parameter; typical values for the model parameters are
 ``\alpha=360`` and ``\mu=6.25``.
 
+
+
 The relevant observable is the overturning strength ``q = 1 + \mu (x-y)^2``. We are interested in the response to the forcing parameter ``F_a``.
 
 ## API
