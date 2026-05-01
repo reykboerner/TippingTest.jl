@@ -14,21 +14,21 @@ with sensitivity ``\alpha``, following the differential equation
 ```math
 m \\dot y = -(y - y_0) + \\alpha F(t) \\.
 ```
-Here ``y_0`` is the reference equilibrium at ``F=0``.
+Here ``y_0`` is the reference state at ``F=0``.
+
+## Fields
+- `y0`: Reference state
+- `params`: Parameter vector `[alpha, m]`
 """
 struct RelaxNullModel{T<:Real} <: LinearNullModel
     y0::T
-    inertia::T
-    sensitivity::T
+    params::Vector{T}
 end
 
 function(nm::RelaxNullModel)(u, p, t)
-    du = (-(u[1] - nm.y0) + nm.sensitivity*p[1])/nm.inertia
+    du = (-(u[1] - nm.y0) + nm.params[1]*p[1])/nm.params[2]
     return SVector{1}(du)
 end
-
-params(nm::RelaxNullModel) = [nm.inertia, nm.sensitivity]
-RelaxNullModel(y0, p::Vector) = RelaxNullModel(y0, p[1], p[2])
 
 struct HarmonicOscillatorNullModel{T<:Real} <: LinearNullModel
     y0::T
