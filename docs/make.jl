@@ -21,5 +21,6 @@ makedocs(;
 
 deploydocs(;
     repo="github.com/reykboerner/TippingTest.jl",
+    branch="github-pages",
     devbranch="main",
 )
