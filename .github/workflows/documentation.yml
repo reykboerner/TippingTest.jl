@@ -2,6 +2,9 @@ name: Documentation
 
 on:
   push:
+    tags:
+      - '*'
+  push:
     branches:
       - main
   pull_request:
