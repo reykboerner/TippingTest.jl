@@ -7,6 +7,13 @@
 A Julia implementation of the tipping classification test proposed by
 [Börner & Dijsktra](https://doi.org/10.5194/egusphere-egu26-18498).
 
+Basic usage:
+
+```julia
+test = tipping_test(observable, forcing, time, (t1, t2);
+    model=LinearNullModel(...), ...)
+```
+
 More details in the [documentation](https://reykboerner.github.io/TippingTest.jl/stable/).
 
 **Reference:**

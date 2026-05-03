@@ -24,6 +24,15 @@ using Pkg; Pkg.add("https://github.com/reykboerner/TippingTest.jl.git")
 
 See the [Example](@ref) and [API](@ref) for an overview of the functionality.
 
+The main method is the [`tipping_test`](@ref) function, which has the syntax
+
+```julia
+test = tipping_test(observable, forcing, time, (t1, t2);
+    model=LinearNullModel(...), fit=true, ...)
+```
+
+and returns a [`TippingTestResult`](@ref) object.
+
 ## Citation
 
 > Börner, R. and Dijkstra, H. A.: To tip or not to tip, EGU General Assembly 2026, Vienna, Austria, 3–8 May 2026, EGU26-18498, [https://doi.org/10.5194/egusphere-egu26-18498](https://doi.org/10.5194/egusphere-egu26-18498), 2026

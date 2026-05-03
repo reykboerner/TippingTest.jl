@@ -32,18 +32,37 @@ With the Tuple `t_tr = (t_s, t_e)`, the user specifies the start (`t_s`) and end
 times of the transition phase `t_tr`. This phase should contain the majority of the 
 shift from regime A to regime B.
 
+The linear null model is specified via the `model` keyword argument. This model is either
+used directly with the parameters set by the user (`fit=false`) or the `model.params` are
+fitted to the observable timeseries using the given `weights` (`fit=true`).
+
 ## Keyword arguments
 - `model`: Instance of a `LinearNullModel` with initial guess for its parameters `p`
-- `weights`: Vector of fitting weights applied to the time intervals `[t_A, t_tr, t_B]`
+- `weights`: Vector of fitting weights applied to the time intervals `[t_A, t_tr, t_B]`,
+- `fit=true`: whether to optimize the parameters of `model` (true) or use `model` as given (false)
 """
 function tipping_test(observable, forcing, time, t_tr::Tuple;
     model::LinearNullModel=RelaxNullModel(observable[1], [1.0, 1.0]),
-    weights::Vector=[1,0,0]
+    weights::Vector=[1,0,0],
+    fit=true
     )
 
     model_type = typeof(model)
-    linear_response, params = fit_nullmodel(observable, forcing, model.params;
-        time, t_tr, model.y0, weights)
+
+    if fit
+        linear_response, params = fit_nullmodel(observable, forcing, model.params;
+            time, t_tr, model.y0, weights)
+    else
+        params = model.params
+        sys = CoupledODEs(model, [model.y0], [0.0])
+        total_time = time[end] - time[1]
+        Δt=time[end]-time[end-1]
+        domain = range(0.0, 1.0, length=length(forcing))
+        F = linear_interpolation(domain, forcing .- forcing[1])
+        fp = ForcingProfile(F, (0.0, 1.0))
+        rsys = RateSystem(sys, fp, 1; forcing_duration=AbstractFloat(total_time), t0=time[1], forcing_start_time=time[1])
+        linear_response = trajectory(rsys, total_time, [observable[1]]; Δt)[1][:,1]
+    end
 
     fitted_model = model_type(model.y0, params)
     residual = sign(params[1])*(observable .- linear_response)

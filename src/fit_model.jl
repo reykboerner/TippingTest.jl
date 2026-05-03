@@ -29,6 +29,8 @@ function fit_nullmodel(observable, forcing, p_guess;
     # Time indices of t_s and t_e
     t_s = findfirst(time .>= t_tr[1])
     t_e = findfirst(time .>= t_tr[2])
+    total_time = time[end] - time[1]
+    Δt=time[end]-time[end-1]
 
     # Set up null model forcing
     domain = range(0.0, 1.0, length=length(forcing))
@@ -38,8 +40,8 @@ function fit_nullmodel(observable, forcing, p_guess;
     function score(p)
         m = model(y0, p)
         sys = CoupledODEs(m, [y0], [0.0])
-        rsys = RateSystem(sys, fp, 1; forcing_duration=AbstractFloat(time[end]))
-        sol = trajectory(rsys, time[end], [observable[1]]; Δt=time[end]-time[end-1])
+        rsys = RateSystem(sys, fp, 1; forcing_duration=AbstractFloat(total_time), t0=time[1], forcing_start_time=time[1])
+        sol = trajectory(rsys, total_time, [observable[1]]; Δt)
         resi = (observable .- sol[1][:,1]) .^2
         return (weights[1]*sum(resi[1:t_s-1]) +
             weights[2]*sum(resi[t_s:t_e-1]) +
@@ -50,8 +52,8 @@ function fit_nullmodel(observable, forcing, p_guess;
 
     m = model(y0, Optim.minimizer(res))
     sys = CoupledODEs(m, [y0], [0.0])
-    rsys = RateSystem(sys, fp, 1; forcing_duration=time[end])
-    sol = trajectory(rsys, time[end], [observable[1]]; Δt=time[end]-time[end-1])
+    rsys = RateSystem(sys, fp, 1; forcing_duration=AbstractFloat(total_time), t0=time[1], forcing_start_time=time[1])
+    sol = trajectory(rsys, total_time, [observable[1]]; Δt=time[end]-time[end-1])
 
     return sol[1][:,1], Optim.minimizer(res)
 end
