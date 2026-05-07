@@ -7,3 +7,4 @@ TippingTest = "75f7372b-cee4-4a9f-bfee-e1c4ff5740ce"
 
 [compat]
 Documenter = "1.17.0"
+Suppressor = "0.2.8"
