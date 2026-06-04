@@ -6,4 +6,5 @@ Suppressor = "fd094767-a336-5f1f-9728-57cf17d0bbfb"
 TippingTest = "75f7372b-cee4-4a9f-bfee-e1c4ff5740ce"
 
 [compat]
+CairoMakie = "0.15.11"
 Documenter = "1.17.0"
