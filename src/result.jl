@@ -43,25 +43,29 @@ fitted to the observable timeseries using the given `weights` (`fit=true`).
 """
 function tipping_test(observable, forcing, time, t_tr::Tuple;
     model::LinearNullModel=RelaxNullModel(observable[1], [1.0, 1.0]),
+    init=[model.y0],
     weights::Vector=[1,0,0],
-    fit=true
+    fit=true,
+    lower=nothing,
+    upper=nothing,
+    kwargs...
     )
 
     model_type = typeof(model)
 
     if fit
         linear_response, params = fit_nullmodel(observable, forcing, model.params;
-            time, t_tr, model.y0, weights)
+            model=model_type, time, t_tr, model.y0, init, weights, upper, lower, kwargs...)
     else
         params = model.params
-        sys = CoupledODEs(model, [model.y0], [0.0])
+        sys = CoupledODEs(model, init, [0.0])
         total_time = time[end] - time[1]
         Δt=time[end]-time[end-1]
         domain = range(0.0, 1.0, length=length(forcing))
         F = linear_interpolation(domain, forcing .- forcing[1])
         fp = ForcingProfile(F, (0.0, 1.0))
         rsys = RateSystem(sys, fp, 1; forcing_duration=AbstractFloat(total_time), t0=time[1], forcing_start_time=time[1])
-        linear_response = trajectory(rsys, total_time, [observable[1]]; Δt)[1][:,1]
+        linear_response = trajectory(rsys, total_time, init; Δt)[1][:,1]
     end
 
     fitted_model = model_type(model.y0, params)
