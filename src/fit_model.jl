@@ -23,7 +23,11 @@ function fit_nullmodel(observable, forcing, p_guess;
     time=0.0:length(observable)-1,
     t_tr=(nothing, nothing),
     y0=observable[1],
-    weights = [1,0,0]
+    init=[observable[1]],
+    weights = [1,0,0],
+    upper = nothing,
+    lower = nothing,
+    kwargs...
     )
 
     # Time indices of t_s and t_e
@@ -39,21 +43,25 @@ function fit_nullmodel(observable, forcing, p_guess;
 
     function score(p)
         m = model(y0, p)
-        sys = CoupledODEs(m, [y0], [0.0])
+        sys = CoupledODEs(m, init, [0.0])
         rsys = RateSystem(sys, fp, 1; forcing_duration=AbstractFloat(total_time), t0=time[1], forcing_start_time=time[1])
-        sol = trajectory(rsys, total_time, [observable[1]]; Δt)
+        sol = trajectory(rsys, total_time, init; Δt)
         resi = (observable .- sol[1][:,1]) .^2
         return (weights[1]*sum(resi[1:t_s-1]) +
             weights[2]*sum(resi[t_s:t_e-1]) +
             weights[3]*sum(resi[t_e:end]))
     end
 
-    res = optimize(score, p_guess)
+    if isnothing(lower)
+        res = optimize(score, p_guess, Optim.Options(; kwargs...))
+    else
+        res = optimize(score, lower, upper, p_guess, Fminbox(GradientDescent()), Optim.Options(; kwargs...))
+    end
 
     m = model(y0, Optim.minimizer(res))
-    sys = CoupledODEs(m, [y0], [0.0])
+    sys = CoupledODEs(m, init, [0.0])
     rsys = RateSystem(sys, fp, 1; forcing_duration=AbstractFloat(total_time), t0=time[1], forcing_start_time=time[1])
-    sol = trajectory(rsys, total_time, [observable[1]]; Δt=time[end]-time[end-1])
+    sol = trajectory(rsys, total_time, init; Δt=time[end]-time[end-1])
 
     return sol[1][:,1], Optim.minimizer(res)
 end

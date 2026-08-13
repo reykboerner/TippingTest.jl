@@ -2,7 +2,7 @@ module TippingTest
 
 using CriticalTransitions: RateSystem, ForcingProfile, CoupledODEs, trajectory, parameters
 using Interpolations: linear_interpolation
-using Optim: Optim, optimize
+using Optim: Optim, optimize, GradientDescent, LBFGS, Fminbox
 using StaticArrays: SVector
 using Statistics: mean
 

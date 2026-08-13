@@ -32,20 +32,15 @@ end
 
 struct HarmonicOscillatorNullModel{T<:Real} <: LinearNullModel
     y0::T
-    inertia::T
-    sensitivity::T
-    damping::T
+    params::Vector{T}
 end
 
 function(nm::HarmonicOscillatorNullModel)(u, p, t)
     x, v = u
     dx = v
-    dv = (-(x - nm.y0) - nm.damping*v + nm.sensitivity*p[1])/nm.inertia
+    dv = (-(x - nm.y0 - nm.params[1]*p[1]) - nm.params[3]*v)/nm.params[2]
     return SVector{2}(dx, dv)
 end
-
-params(nm::HarmonicOscillatorNullModel) = [nm.inertia, nm.sensitivity, nm.damping]
-HarmonicOscillatorNullModel(y0, p::Vector) = RelaxNullModel(y0, p[1], p[2], p[3])
 
 struct GeneralNullModel{T<:Real, G} <: LinearNullModel
     y0::T

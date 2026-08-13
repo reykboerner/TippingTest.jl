@@ -1,6 +1,6 @@
 name = "TippingTest"
 uuid = "75f7372b-cee4-4a9f-bfee-e1c4ff5740ce"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["R. Boerner"]
 
 [deps]
