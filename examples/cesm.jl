@@ -105,7 +105,7 @@ eta_c = 3;
 # below ``\eta_c`` in the RCP2.6 case, whereas for RCP4.5 it increases significantly and 
 # remains persistently above ``\eta_c`` until the end of the simulation.
 
-f = Figure(size=(800,400))
+f = Figure(size=(800,500))
 ax = Matrix{Axis}(undef, 2, 2)
 for i in 1:2
     for (j, v) in enumerate(["AMOC (Sv)", "Residual η (Sv)"])
