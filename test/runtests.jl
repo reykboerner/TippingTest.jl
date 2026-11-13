@@ -5,7 +5,7 @@ using Test
     @testset "Model definition" begin
         model = RelaxNullModel(0.0, [1.0, 1.0])
         @test typeof(model) <: LinearNullModel
-        @test model.y0 == 0.0
+        @test model.x0 == 0.0
         @test model.params[1] == 1.0
     end
 
