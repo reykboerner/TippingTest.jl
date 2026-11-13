@@ -1,7 +1,6 @@
 # TippingTest.jl
 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://reykboerner.github.io/TippingTest.jl/stable/)
-[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://reykboerner.github.io/TippingTest.jl/dev/)
+[![Docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://reykboerner.github.io/TippingTest.jl/dev/)
 [![Build Status](https://github.com/reykboerner/TippingTest.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/reykboerner/TippingTest.jl/actions/workflows/CI.yml?query=branch%3Amain)
 
 A Julia implementation of the tipping classification test proposed by
@@ -20,7 +19,7 @@ test = tipping_test(observable, forcing, time, (t_s, t_e);
     model=LinearNullModel(...), ...)
 ```
 
-More details in the [documentation](https://reykboerner.github.io/TippingTest.jl/stable/).
+More details in the [documentation](https://reykboerner.github.io/TippingTest.jl/dev/).
 
 **Reference:**
 
