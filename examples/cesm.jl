@@ -11,8 +11,9 @@
 
 # Our dataset contains simulations with the Community Earth System Model (CESM) under
 # greenhouse gas emissions scenarios (see the [paper](https://doi.org/10.5194/egusphere-2026-3507) for details).
-# Specifically, we here consider two scenarios: (a) RCP2.6, where the AMOC does not tip, and 
-# (b) RCP4.5, where the AMOC tips (both with constant background freshwater flux of ``F_H=0.18`` Sv).
+# Specifically, we here consider two scenarios (both with constant background freshwater flux of ``F_H=0.18`` Sv):
+# - RCP2.6, where the AMOC does not tip
+# - RCP4.5, where the AMOC tips.
 
 # First, let us load the `cesm_amoc_forcing_data.nc` file containing the dataset. It is stored in the package
 # github repository and contains all forcing scenarios discussed in the paper.
@@ -54,7 +55,7 @@ f
 
 t_s = findfirst(data["time_rcp"][:] .>= 2026)
 t_e = findfirst(data["time_rcp"][:] .>= 2200)
-println(t_s, t_e)
+println("Time indices: t_s=$(t_s), t_e=$(t_e)")
 
 # As the reference state ``x_*``, we set an AMOC strength of 17.5 Sv.
 
@@ -139,7 +140,7 @@ f
 # using NCDatasets
 # using TippingTest
 # 
-# path = get(ENV, "EXAMPLE_DIR", @__DIR__) #hide
+# path = get(ENV, "EXAMPLE_DIR", @__DIR__) # change if needed
 # data = NCDataset(joinpath(path, "cesm_amoc_forcing_data.nc"));
 # cases = ["fh18_rcp26", "fh18_rcp45"]
 # time = data["time_rcp"][:]

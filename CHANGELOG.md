@@ -1,5 +1,9 @@
 # Changelog for `TippingTest.jl`
 
+## v0.3.1
+
+Minor docs edits and fixes. No breaking changes.
+
 ## v0.3
 
 Release with publication of ESD paper, ensuring consistency.

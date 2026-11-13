@@ -23,11 +23,10 @@ For more information, see the [paper](https://doi.org/10.5194/egusphere-2026-350
 
 ## Installation
 
-In Julia, add these two lines to install and load the package:
+In Julia, add this line to install the package:
 
 ```julia
 using Pkg; Pkg.add("https://github.com/reykboerner/TippingTest.jl.git")
-using TippingTest
 ```
 
 ## Usage
