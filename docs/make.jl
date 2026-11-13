@@ -17,6 +17,7 @@ makedocs(;
         size_threshold=800*1024,
     ),
     pages,
+    pagesonly = true,
 )
 
 deploydocs(;
