@@ -34,16 +34,23 @@ shift from regime A to regime B.
 
 The linear null model is specified via the `model` keyword argument. This model is either
 used directly with the parameters set by the user (`fit=false`) or the `model.params` are
-fitted to the observable timeseries using the given `weights` (`fit=true`).
+fitted to the observable timeseries using the given `weights` (`fit=true`). Fitting is 
+performed using the functionality of Optim.jl.
 
 ## Keyword arguments
-- `model`: Instance of a `LinearNullModel` with initial guess for its parameters `p`
-- `weights`: Vector of fitting weights applied to the time intervals `[t_A, t_tr, t_B]`,
-- `fit=true`: whether to optimize the parameters of `model` (true) or use `model` as given (false)
+- `model`: Instance of a `LinearNullModel` with initial guess for its parameters `p`.
+  The default is `RelaxNullModel(observable[1], [1.0, 1.0])`.
+- `init = [model.x0]`: Initial condition for the null model at time `t0`.
+- `weights = [1,0,0]`: Relative fitting weights applied to the time intervals `[t_A, t_tr, t_B]`.
+- `fit = true`: whether to optimize the parameters of `model` (true) or use `model` as given (false).
+- `lower = nothing`: Lower optimization bounds for `model.params`. If nothing, unbounded optimization is used.
+- `upper = nothing`: Upper optimization bounds for `model.params`. Use together with `lower`.
+- `kwargs...`: Additional keyword arguments forwarded to `Optim.Options`. If omitted,
+  `Optim.Options()` uses its own defaults.
 """
 function tipping_test(observable, forcing, time, t_tr::Tuple;
     model::LinearNullModel=RelaxNullModel(observable[1], [1.0, 1.0]),
-    init=[model.y0],
+    init=[model.x0],
     weights::Vector=[1,0,0],
     fit=true,
     lower=nothing,
@@ -55,7 +62,7 @@ function tipping_test(observable, forcing, time, t_tr::Tuple;
 
     if fit
         linear_response, params = fit_nullmodel(observable, forcing, model.params;
-            model=model_type, time, t_tr, model.y0, init, weights, upper, lower, kwargs...)
+            model=model_type, time, t_tr, model.x0, init, weights, upper, lower, kwargs...)
     else
         params = model.params
         sys = CoupledODEs(model, init, [0.0])
@@ -68,8 +75,8 @@ function tipping_test(observable, forcing, time, t_tr::Tuple;
         linear_response = trajectory(rsys, total_time, init; Δt)[1][:,1]
     end
 
-    fitted_model = model_type(model.y0, params)
-    residual = sign(params[1])*(observable .- linear_response)
+    fitted_model = model_type(model.x0, params)
+    residual = abs.(observable .- linear_response)
     drdF = diff(residual) ./ diff(forcing)
     drdx = diff(residual) ./ diff(linear_response)
 
