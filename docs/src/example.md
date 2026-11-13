@@ -34,7 +34,7 @@ println("Fitted parameters: $(test.nullmodel.params)")
 end # hide
 ```
 
-As expected, the fitted parameters are $\alpha=0.2$ for the sensitivity and $m \approx 0$ for the inertia.
+As expected, the fitted parameters are $\beta=0.2$ for the sensitivity and $m \approx 0$ for the inertia.
 
 The residual is close to zero for all times, meaning that linear response can fully explain the time evolution of the observable and hence no tipping occurs.
 
@@ -59,13 +59,13 @@ form as a 2-dimensional system of ODEs:
 
 ```math
 \begin{align}
-    \dot{x} &= -\alpha(x-1) - x(1+\mu(x-y)^2) \nonumber \\
+    \dot{x} &= -\beta(x-1) - x(1+\mu(x-y)^2) \nonumber \\
     \dot{y} &= F_a - y(1+\mu(x-y)^2)
 \end{align}
 ```
 
 Here $x$ and $y$ represent the meridional temperature and salinity difference between the southern and northern box, respectively. The freshwater flux ``F_a`` is the main forcing parameter; typical values for the model parameters are
-``\alpha=360`` and ``\mu=6.25``.
+``\beta=360`` and ``\mu=6.25``.
 
 The relevant observable is the overturning strength ``q = 1 + \mu (x-y)^2``. We are interested in the response to the forcing parameter ``F_a``.
 
@@ -77,8 +77,8 @@ using TippingTest
 
 function stommel(u,p,t)
     x, y = u
-    F, alpha, mu = p 
-    dx = - alpha*(x - 1) - x*(1 + mu*(x - y)^2)
+    F, beta, mu = p 
+    dx = - beta*(x - 1) - x*(1 + mu*(x - y)^2)
     dy = F - y*(1 + mu*(x - y)^2)
     return SVector{2}(dx, dy)
 end

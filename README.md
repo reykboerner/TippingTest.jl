@@ -10,7 +10,7 @@ A Julia implementation of the tipping classification test proposed by
 Basic usage:
 
 ```julia
-test = tipping_test(observable, forcing, time, (t1, t2);
+test = tipping_test(observable, forcing, time, (t_s, t_e);
     model=LinearNullModel(...), ...)
 ```
 
@@ -18,6 +18,6 @@ More details in the [documentation](https://reykboerner.github.io/TippingTest.jl
 
 **Reference:**
 
-> Börner, R. and Dijkstra, H. A.: To tip or not to tip (in review), [DOI: 10.5194/egusphere-2026-3507](https://doi.org/10.5194/egusphere-2026-3507).
+> Börner, R. and Dijkstra, H. A.: To tip or not to tip [DOI: 10.5194/egusphere-2026-3507](https://doi.org/10.5194/egusphere-2026-3507) (2026).
 
 This work is funded by the [ClimTip](https://climate-tipping-points.eu) project.
