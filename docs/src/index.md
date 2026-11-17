@@ -5,7 +5,7 @@ CurrentModule = TippingTest
 # TippingTest.jl
 
 A Julia implementation of the tipping classification test proposed by
-[Börner & Dijsktra (2026)](https://doi.org/10.5194/egusphere-2026-3507).
+[Börner & Dijsktra (2026)](https://doi.org/10.5194/esd-17-1671-2026).
 
 ```@raw html
 <img src="assets/boerner_totip_keyimage.png" width="400"/>
@@ -19,7 +19,7 @@ the test assesses whether the system tips during ``\tau``. This assessment is ba
 comparing the evolution of ``\psi(t)`` with the prediction of a linear response null
 model subjected to the forcing.
 
-For more information, see the [paper](https://doi.org/10.5194/egusphere-2026-3507).
+For more information, see the [paper](https://doi.org/10.5194/esd-17-1671-2026).
 
 ## Installation
 
@@ -44,16 +44,19 @@ and returns a [`TippingTestResult`](@ref) object.
 
 ## Citation
 
-> Börner, R. and Dijkstra, H. A.: To tip or not to tip. [egusphere-2026-3507](https://doi.org/10.5194/egusphere-2026-3507) (2026).
+> Börner, R. and Dijkstra, H. A.: To tip or not to tip. Earth System Dynamics 17, 1671–1686, DOI:[10.5194/esd-17-1671-2026](https://doi.org/10.5194/esd-17-1671-2026) (2026).
 
 BibTex:
 ```
 @article{borner_tip_2026,
-  title={To tip or not to tip},
-  author={B{\"o}rner, Reyk and Dijkstra, Henk A},
-  journal={Earth System Dynamics},
-  year={2026},
-  doi={10.5194/egusphere-2026-3507},
+  title = {To Tip or Not to Tip},
+  author = {B{\"o}rner, Reyk and Dijkstra, Henk A.},
+  year = 2026,
+  journal = {Earth System Dynamics},
+  volume = {17},
+  number = {6},
+  pages = {1671--1686},
+  doi = {10.5194/esd-17-1671-2026},
 }
 ```
 

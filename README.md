@@ -4,7 +4,7 @@
 [![Build Status](https://github.com/reykboerner/TippingTest.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/reykboerner/TippingTest.jl/actions/workflows/CI.yml?query=branch%3Amain)
 
 A Julia implementation of the tipping classification test proposed by
-[Börner & Dijsktra](https://doi.org/10.5194/egusphere-2026-3507).
+[Börner & Dijkstra (2026)](https://doi.org/10.5194/esd-17-1671-2026).
 
 ## Installation
 
@@ -23,6 +23,6 @@ More details in the [documentation](https://reykboerner.github.io/TippingTest.jl
 
 **Reference:**
 
-> Börner, R. and Dijkstra, H. A.: To tip or not to tip [DOI: 10.5194/egusphere-2026-3507](https://doi.org/10.5194/egusphere-2026-3507) (2026).
+> Börner, R. and Dijkstra, H. A.: To tip or not to tip. Earth System Dynamics 17, 1671–1686, DOI:[10.5194/esd-17-1671-2026](https://doi.org/10.5194/esd-17-1671-2026) (2026).
 
 This work is funded by the [ClimTip](https://climate-tipping-points.eu) project.

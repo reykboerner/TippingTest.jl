@@ -2,7 +2,7 @@
 # ## Example: AMOC tipping under CO2 forcing
 
 # > This example illustrates the main package functionality and reproduces the
-# > results shown in Fig. 3 of [Börner & Dijkstra (2026)](https://doi.org/10.5194/egusphere-2026-3507).
+# > results shown in Fig. 3 of [Börner & Dijkstra (2026)](https://doi.org/10.5194/esd-17-1671-2026).
 
 # As a tipping system, we consider the Atlantic Meridional Overturning Circulation (AMOC),
 # a key component of the global ocean circulation. A standard observable is the AMOC strength
@@ -10,7 +10,7 @@
 # of the atmospheric CO2 concentration (normalized by preindustrial levels of 285 ppm).
 
 # Our dataset contains simulations with the Community Earth System Model (CESM) under
-# greenhouse gas emissions scenarios (see the [paper](https://doi.org/10.5194/egusphere-2026-3507) for details).
+# greenhouse gas emissions scenarios (see the [paper](https://doi.org/10.5194/esd-17-1671-2026) for details).
 # Specifically, we here consider two scenarios (both with constant background freshwater flux of ``F_H=0.18`` Sv):
 # - RCP2.6, where the AMOC does not tip
 # - RCP4.5, where the AMOC tips.
@@ -129,6 +129,9 @@ linkyaxes!(ax[1,:])
 linkyaxes!(ax[2,:])
 axislegend(ax[1,1], position=:lb)
 f
+
+# AMOC and forcing timeseries from the other simulations analyzed in the [paper](https://doi.org/10.5194/esd-17-1671-2026)
+# are also available in the `cesm_amoc_forcing_data.nc` dataset.
 
 # ## Copy-paste code
 # You can copy-paste the code below to run this example.

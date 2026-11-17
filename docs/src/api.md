@@ -3,7 +3,7 @@
 ![](assets/fig01.png)
 
 Figure: Problem setting. During the time interval ``\tau = [t_0, t_1]``, is the system tipping in
-``\psi`` under the forcing ``F``? From [Börner & Dijkstra (2026)](https://doi.org/10.5194/egusphere-2026-3507).
+``\psi`` under the forcing ``F``? From [Börner & Dijkstra (2026)](https://doi.org/10.5194/esd-17-1671-2026).
 
 ## Tipping test
 
