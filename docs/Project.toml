@@ -10,5 +10,6 @@ TippingTest = "75f7372b-cee4-4a9f-bfee-e1c4ff5740ce"
 [compat]
 CairoMakie = "0.15.13"
 Documenter = "1.17.0"
+NCDatasets = "0.14.15"
 Literate = "2.21.1"
 Suppressor = "0.2.8"
