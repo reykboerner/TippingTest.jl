@@ -1,5 +1,9 @@
 # Changelog for `TippingTest.jl`
 
+## v0.3.2
+
+Fix incorrect labelling of RCP scenarios in the documentation. No breaking changes.
+
 ## v0.3.1
 
 Minor docs edits and fixes. No breaking changes.
